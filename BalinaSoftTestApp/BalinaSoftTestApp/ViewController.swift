@@ -133,6 +133,12 @@ class ViewController: UIViewController {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if let responseDict = json as? [String: String], let id = responseDict["id"] {
                         print("Успешно загружено. ID: \(id)")
+                        
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: "Успешно загружено", message: "ID: \(id)", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
                     }
                 } catch {
                     print("JSON parsing error: \(error.localizedDescription)")
